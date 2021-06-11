@@ -1,14 +1,24 @@
 terraform {
   required_providers {
     aws = {
-      version = "~> 2.0"
+      source  = "hashicorp/aws"
+      version = "~> 3.27"
     }
-}
+  }
+
+  required_version = ">= 0.14.9"
 }
 provider "aws" {
-  region = "us-west-2"
+  profile = "default"
+  region  = "us-west-2"
 }
 
-resource "aws_s3_bucket" "bharathibucket" {
-  bucket =  "bharathibucket"
+resource "aws_instance" "resource1" {
+  ami           = "ami-830c94e3"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Bharathi"
+  }
 }
+
